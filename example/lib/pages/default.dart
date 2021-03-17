@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location/flutter_map_location.dart';
 
@@ -45,13 +46,13 @@ class _DefaultPageState extends State<DefaultPage> {
               LocationOptions(
                 markers: userLocationMarkers,
                 onLocationUpdate: (LatLngData ld) {
-                  print('Location updated: ${ld?.location}');
+                  print('Location updated: ${ld.location}');
                 },
                 onLocationRequested: (LatLngData ld) {
-                  if (ld == null || ld.location == null) {
+                  if (ld.location == null) {
                     return;
                   }
-                  mapController?.move(ld.location, 16.0);
+                  mapController.move(ld.location, 16.0);
                 },
                 buttonBuilder: (BuildContext context,
                     ValueNotifier<LocationServiceStatus> status,
@@ -64,7 +65,7 @@ class _DefaultPageState extends State<DefaultPage> {
                           child: ValueListenableBuilder<LocationServiceStatus>(
                               valueListenable: status,
                               builder: (BuildContext context,
-                                  LocationServiceStatus value, Widget child) {
+                                  LocationServiceStatus value, Widget? child) {
                                 switch (value) {
                                   case LocationServiceStatus.disabled:
                                   case LocationServiceStatus.permissionDenied:
@@ -73,13 +74,11 @@ class _DefaultPageState extends State<DefaultPage> {
                                       Icons.location_disabled,
                                       color: Colors.white,
                                     );
-                                    break;
                                   default:
                                     return const Icon(
                                       Icons.location_searching,
                                       color: Colors.white,
                                     );
-                                    break;
                                 }
                               }),
                           onPressed: () => onPressed()),
