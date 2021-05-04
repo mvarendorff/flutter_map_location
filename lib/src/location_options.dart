@@ -33,5 +33,5 @@ class LocationOptions extends LayerOptions {
   final LocationButtonBuilder buttonBuilder;
   final LocationMarkerBuilder markerBuilder;
   final int updateIntervalMs;
-  List<Marker> markers;
+  final List<Marker> markers;
 }
